@@ -1,0 +1,6 @@
+[project]
+name = "python-oop-inventory-manager"
+version = "0.1.0"
+description = "Learning project for solid Python OOP fundamentals through an inventory manager"
+requires-python = ">=3.13"
+dependencies = []
