@@ -30,4 +30,4 @@ dist/
 .coverage
 htmlcov/
 .pytest_cache/
-EOF
+EOFmain.py
