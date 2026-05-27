@@ -5,8 +5,8 @@ class Product:
             raise ValueError("Le nom du produit ne peut pas être vide")
 
         self.name = name
-        self._qty = qty
-        self._price = price
+        self.qty = qty
+        self.price = price
 
     @classmethod
     def from_dict(cls, data: dict) -> "Product":
@@ -23,29 +23,35 @@ class Product:
             "price": self._price
         }
 
-    def get_qty(self) -> int:
+    @property
+    def qty(self) -> int:
         return self._qty
-
-    def set_qty(self, value: int) -> int:
+    
+    
+    @qty.setter
+    def qty(self, value: int):
         if value < 0:
             raise ValueError("qty ne peut pas être négatif")
         self._qty = value
 
-    def get_price(self) -> float:
+    @property
+    def price(self) -> float:
         return self._price
 
-    def set_price(self, value: float) -> float:
+    @price.setter
+    def price(self, value: float):
         if value < 0:
             raise ValueError("price ne peut pas être négatif")
         self._price = value
 
+    @property
     def total_value(self) -> float:
         return self._qty * self._price
-
+    
     def is_low_stock(self, threesold=5) -> bool:
         return self._qty < threesold
 
     def get_summary(self) -> str:
-        return (f"[⚠] {self.name} — {self._qty} unités — {self.total_value():.2f}€"
+        return (f"[⚠] {self.name} — {self._qty} unités — {self.total_value:.2f}€"
                 if self.is_low_stock() else
-                f"[✓] {self.name} — {self._qty} unités — {self.total_value():.2f}€")
+                f"[✓] {self.name} — {self._qty} unités — {self.total_value:.2f}€")
