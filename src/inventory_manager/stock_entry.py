@@ -1,22 +1,20 @@
 class StockEntry:
 
-    def __init__(self, product_name, quantity, unit_price, supplier_name="Inconnu"):
-        if not product_name or not product_name.strip():
-            raise ValueError("Le nom du produit ne peut pas être vide")
+    def __init__(self, product: "Product", supplier: "Supplier", quantity: int):
         if quantity <= 0:
-            raise ValueError(f"La quantité doit être > 0, reçu : {quantity}")
-        if unit_price <= 0:
-            raise ValueError(
-                f"Le prix unitaire doit être > 0, reçu : {unit_price}")
+            raise ValueError("La quantité doit être > 0")
 
-        self.product_name = product_name
+        self.product = product
+        self.supplier = supplier
         self.quantity = quantity
-        self.unit_price = unit_price
-        self.supplier_name = supplier_name
-        self.total_cost = round(quantity * unit_price, 2)
+        self.total_cost = round(product.price * quantity, 2)
 
-    def get_receipt(self):
-        return f"Réception — {self.product_name} (x{self.quantity}) @ {self.unit_price:.2f}€/u — Total : {self.total_cost:.2f}€ [{self.supplier_name}]"
+    def get_receipt(self) -> str:
+        return (
+            f"Réception — {self.product.name} (x{self.quantity})"
+            f" @ {self.product.price:.2f}€/u"
+            f" Total : {self.total_cost:.2f}€ [{self.supplier.name}]"
+        )
 
-    def is_large_order(self, threshold):
+    def is_large_order(self, threshold) -> bool:
         return self.total_cost > threshold
