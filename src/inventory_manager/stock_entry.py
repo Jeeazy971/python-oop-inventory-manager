@@ -18,3 +18,11 @@ class StockEntry:
 
     def is_large_order(self, threshold) -> bool:
         return self.total_cost > threshold
+
+    def __repr__(self) -> str:
+        return (f"StockEntry(product={self.product.name!r}, "
+                f"supplier={self.supplier.name!r}, "
+                f"quantity={self.quantity}, total_cost={self.total_cost})")
+
+    def __str__(self) -> str:
+        return self.get_receipt()

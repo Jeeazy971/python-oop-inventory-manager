@@ -26,8 +26,7 @@ class Product:
     @property
     def qty(self) -> int:
         return self._qty
-    
-    
+
     @qty.setter
     def qty(self, value: int):
         if value < 0:
@@ -47,7 +46,7 @@ class Product:
     @property
     def total_value(self) -> float:
         return self._qty * self._price
-    
+
     def is_low_stock(self, threesold=5) -> bool:
         return self._qty < threesold
 
@@ -55,3 +54,9 @@ class Product:
         return (f"[⚠] {self.name} — {self._qty} unités — {self.total_value:.2f}€"
                 if self.is_low_stock() else
                 f"[✓] {self.name} — {self._qty} unités — {self.total_value:.2f}€")
+
+    def __repr__(self) -> str:
+        return f"Product(name={self.name!r}, qty={self.qty}, price={self.price})"
+
+    def __str__(self) -> str:
+        return f"{self.name} — {self._qty} unités à {self._price:.2f}€"
